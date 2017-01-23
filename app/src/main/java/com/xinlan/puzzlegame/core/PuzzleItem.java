@@ -16,4 +16,7 @@ public class PuzzleItem {
 //    float src_width;
 //    float src_height;
     float rotate;
+
+    int index_x;
+    int index_y;
 }//end class

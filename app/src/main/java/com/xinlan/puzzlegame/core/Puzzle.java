@@ -1,6 +1,7 @@
 package com.xinlan.puzzlegame.core;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -25,6 +26,8 @@ public class Puzzle {
     Texture srcTexture;
 
     List<PuzzleItem> itemList;
+
+    boolean isTouch = false;
 
     public Puzzle(String orignFile) {
         this.originFile = orignFile;
@@ -54,7 +57,7 @@ public class Puzzle {
         int view_height = VIEW_HEIGHT / y_num;
 
         int index = 0;
-        float padding = 3;
+        float padding = 0;
         for (int j = 0; j < y_num; j++) {
             for (int i = 0; i < x_num; i++) {
                 PuzzleItem item = new PuzzleItem();
@@ -73,13 +76,22 @@ public class Puzzle {
     }
 
     float angle = 0;
+    float wait = 0;
 
     public void render(float delta, SpriteBatch batch) {
-        angle +=2;
+        if (isTouch) {
+            angle += 4;
+        }
+
         for (int i = 0; i < itemList.size(); i++) {
             PuzzleItem item = itemList.get(i);
-            batch.draw(item.texture, item.x, item.y, item.width / 2,
-                    item.height / 2, item.width, item.height, 1, 1, angle);
+            batch.draw(item.texture, item.x, item.y, 0,
+                    0, item.width, item.height, 1, 1, angle);
+        }
+
+        if (angle >= 360) {
+            angle = 0;
+            isTouch = false;
         }
 
     }
