@@ -19,7 +19,8 @@ public class GameScreen implements Screen {
     public OrthographicCamera gameCamera;
     public SpriteBatch batch;
 
-    public Puzzle mPuzzle;
+    Puzzle mPuzzle;
+    Benchmark benchmark;
 
     public GameScreen(PuzzleApp game) {
     }
@@ -37,6 +38,8 @@ public class GameScreen implements Screen {
         mPuzzle = new Puzzle("demo.jpg");
 
         mPuzzle.initPuzzles(7,5);
+
+        benchmark = new Benchmark(200,SCREEN_HEIGHT - 200,mPuzzle);
     }
 
     @Override
@@ -48,6 +51,8 @@ public class GameScreen implements Screen {
         batch.setProjectionMatrix(gameCamera.combined);
         gameCamera.update();
 
+
+        benchmark.render(gameCamera);
 
 
         batch.begin();

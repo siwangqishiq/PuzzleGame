@@ -27,7 +27,12 @@ public class Puzzle {
 
     List<PuzzleItem> itemList;
 
+    float cube_width;
+    float cube_height;
+
     boolean isTouch = false;
+
+    float padding = 0;
 
     public Puzzle(String orignFile) {
         this.originFile = orignFile;
@@ -53,21 +58,20 @@ public class Puzzle {
         int item_width = src_width / x_num;
         int item_height = src_height / y_num;
 
-        int view_width = VIEW_WIDTH / x_num;
-        int view_height = VIEW_HEIGHT / y_num;
+        cube_width = VIEW_WIDTH / x_num;
+        cube_height = VIEW_HEIGHT / y_num;
 
         int index = 0;
-        float padding = 0;
         for (int j = 0; j < y_num; j++) {
             for (int i = 0; i < x_num; i++) {
                 PuzzleItem item = new PuzzleItem();
-                item.width = view_width;
-                item.height = view_height;
+                item.width = cube_width;
+                item.height = cube_height;
                 item.texture = new TextureRegion(srcTexture, i * item_width, j * item_height, item_width, item_height);
                 item.index = index;
 
-                item.x = padding + i * (view_width + padding);
-                item.y = VIEW_HEIGHT - j * (view_height + padding);
+                item.x = padding + i * (cube_width + padding);
+                item.y = VIEW_HEIGHT - j * (cube_height + padding);
 
                 itemList.add(item);
                 index++;
